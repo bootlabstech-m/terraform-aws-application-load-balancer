@@ -5,10 +5,10 @@ resource "aws_lb" "balance_the_load" {
   ip_address_type    = var.ip_address_type
   security_groups    = var.security_groups
   subnets            = var.subnets
-  enable_deletion_protection       = false
+  enable_deletion_protection       = var.enable_deletion_protection
   desync_mitigation_mode           = "defensive"
   drop_invalid_header_fields       = false
-  enable_cross_zone_load_balancing = true
+  enable_cross_zone_load_balancing = var.enable_cross_zone_load_balancing
   enable_http2                     = true
   idle_timeout                     = 60
   preserve_host_header             = false
