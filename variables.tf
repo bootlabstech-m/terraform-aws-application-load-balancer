@@ -45,23 +45,4 @@ variable "target_type" {
   description = "Type of target group eg, instance,alb, lambda,ip "
   type        = string
 }
-variable "target_id" {
-  type        = string
-  description = "instance id"
-}
-variable "listener_port" {
-  type        = number
-  description = "listener port"
-}
-variable "ssl_policy" {
-  type        = string
-  description = "ssl_policy"
-}
-variable "certificate_arn" {
-  type        = string
-  description = "certificate_arn"
-}
-variable "listener_protocol" {
-  type        = string
-  description = "Protocol for connections from clients to the load balancer"
-}
+
