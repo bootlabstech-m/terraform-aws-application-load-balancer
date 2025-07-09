@@ -26,8 +26,28 @@ resource "aws_lb_target_group" "tg" {
   target_type = var.target_type
 }
 
+resource "aws_lb_listener" "https_listener" {
+  count             = var.listener_protocol == "HTTPS" ? 1 : 0
+  load_balancer_arn = aws_lb.balance_the_load.arn
+  port              = var.listener_port
+  protocol          = var.listener_protocol
+  ssl_policy        = var.ssl_policy
+  certificate_arn   = var.certificate_arn
 
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg.arn
+  }
+}
 
+resource "aws_lb_listener" "http_listener" {
+  count             = var.listener_protocol == "HTTP" ? 1 : 0
+  load_balancer_arn = aws_lb.balance_the_load.arn
+  port              = var.listener_port
+  protocol          = var.listener_protocol
 
-
-
+  default_action {
+    type             = "forward" # supported values "redirect" "fixed-response"
+    target_group_arn = aws_lb_target_group.tg.arn
+  }
+}
