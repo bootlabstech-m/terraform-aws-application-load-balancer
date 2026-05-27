@@ -30,6 +30,7 @@ resource "aws_lb_target_group_attachment" "test" {
   target_group_arn = aws_lb_target_group.tg.arn
   target_id        = var.target_id
   port             = var.target_port
+  depends_on = [aws_instance.web-server] 
 }
 
 resource "aws_lb_listener" "front_end" {
